@@ -1,0 +1,9 @@
+<nav>
+    <a href="/">Home</a>
+    {{ range after 1 .Ancestors.Reverse }}
+    <i class="fa-solid fa-chevron-right"></i>
+    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+    {{ end }}
+    <i class="fa-solid fa-chevron-right"></i>
+    {{ .Title }}
+</nav>

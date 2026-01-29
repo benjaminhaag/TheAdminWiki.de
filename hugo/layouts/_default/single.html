@@ -1,0 +1,209 @@
+{{ define "title" -}}
+{{ .Title }}
+{{- end }}
+
+
+{{ define "main" -}}
+<div id="heading">
+    <div>
+    </div>
+    <div class="heading">
+        {{ partial "breadcrumb.html" . }}
+        <h1>{{ block "title" . }}{{ end }}</h1>
+        <div class="info">
+            <p>
+                <time datetime="{{ .Date.Format "2025-12-14T14:25:05Z07:00" }}">{{ .Date.Format "January 2, 2006" }}</time>
+                <span style="margin: 0 5px;">•</span>
+                <span class="reading-time">{{ .ReadingTime }} min read</span>
+            </p>
+            <a id="copy-url" href="{{ .Permalink }}" ><i class="fa-solid fa-link"></i><span class="label">Copy URL</span></a>
+            <script>
+                const link = document.getElementById("copy-url");
+                const label = link.querySelector(".label");
+                link.addEventListener("click", async (e) => {
+                    e.preventDefault();
+                    try {
+                        await navigator.clipboard.writeText("{{ .Permalink }}");
+                        label.textContent = "Copied";
+                        link.classList.add("copied");
+                        setTimeout(() => {
+                            label.textContent = "Copy URL";
+                            link.classList.remove("copied");
+                        }, 2000);
+                    } catch (err) {
+                        alert("Failed to copy link");
+                    }
+                });
+            </script>
+        </div>
+    </div>
+    <div>
+    </div>
+</div>
+<div id="content">
+    <aside>
+        <div id="toc">
+            Jump to section
+            {{ .TableOfContents }}
+        </div>
+    </aside>
+<article>
+    <img src="{{ .Params.image | default "/images/default.webp" }}" alt="{{ .Title }}">
+    {{- $content := .RawContent -}}
+
+    {{- $content = replaceRE
+        `(?m)^> \[!WARNING\][ \t]*\n((?:^>.*\n)*)`
+        "{{< warning >}}\n$1{{< /warning >}}\n"
+        $content
+    -}}
+
+    {{- $content = replaceRE
+        `(?m)^> \[!TIP\][ \t]*\n((?:^>.*\n)*)`
+        "{{< tip >}}\n$1{{< /tip >}}\n"
+        $content
+    -}}
+
+    {{- $content = replaceRE
+        `(?m)^> \[!NOTE\][ \t]*\n((?:^>.*\n)*)`
+        "{{< note >}}\n$1{{< /note >}}\n"
+        $content
+    -}}
+
+    {{- $content = replaceRE
+        `(?m)^> \[!IMPORTANT\][ \t]*\n((?:^>.*\n)*)`
+        "{{< important >}}\n$1{{< /important >}}\n"
+        $content
+    -}}
+
+    {{- $content = replaceRE
+        `(?m)^> \[!ADDRESS\][ \t]*\n((?:^>.*\n)*)`
+        "{{< address >}}\n$1{{< /address >}}\n"
+        $content
+    -}}
+
+    {{- /* strip leading > from inside admonitions only */ -}}
+    {{- $content = replaceRE `(?m)^> ?` "" $content -}}
+
+    {{- $content = replaceRE `(?m)^> ?` "" $content -}}
+    {{- $content = replaceRE `\n` "  \n" $content -}}
+
+    {{ $content | markdownify }}
+</article>
+    <aside class="taglist">
+        {{- if isset .Params "tags" -}}
+            {{- $tagsLen := len .Params.tags -}}
+            {{- if gt $tagsLen 0 -}}
+                Continue reading:
+                <ul>
+                {{- range $k, $v := .Params.tags -}}
+                {{- $url := printf "/tags/%s" (. | urlize | lower) -}}
+                <li>
+                    <a id="tag_{{ . | lower }}" href="{{ $url | absURL }}">{{ . | title }}</a>
+                </li>
+                {{- end -}}
+                </ul>
+            {{- end -}}
+        {{- end }}
+    </aside>
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const toc = document.getElementById("toc");
+  if (!toc) return;
+
+  const links = Array.from(toc.querySelectorAll("a"));
+  const headings = links
+    .map(link => document.getElementById(link.hash.slice(1)))
+    .filter(Boolean);
+
+  const headerOffset = 100;
+  let activeId = null;
+  let ticking = false;
+
+  function setActive(id) {
+    if (!id || id === activeId) return;
+    activeId = id;
+
+    links.forEach(link => {
+      link.classList.remove("active");
+      link.parentElement.classList.remove("active");
+    });
+
+    const activeLink = toc.querySelector(
+      `a[href="#${CSS.escape(id)}"]`
+    );
+
+    if (activeLink) {
+      activeLink.classList.add("active");
+      activeLink.parentElement.classList.add("active");
+    }
+  }
+
+  function onScroll() {
+    if (ticking) return;
+
+    window.requestAnimationFrame(() => {
+      const scrollPos = window.scrollY + headerOffset + 1;
+
+      let current = headings[0]?.id;
+
+      for (const heading of headings) {
+        if (heading.offsetTop <= scrollPos) {
+          current = heading.id;
+        } else {
+          break;
+        }
+      }
+
+      setActive(current);
+      ticking = false;
+    });
+
+    ticking = true;
+  }
+
+  // Initial state
+  onScroll();
+
+  // Listen
+  window.addEventListener("scroll", onScroll, { passive: true });
+});
+</script>
+
+<div id="readmore">
+    <p>Continue Reading</p>
+    <div>
+        <div class="storynav">
+            {{- with .Prev }}
+            <a href="{{ .RelPermalink }}">
+                <span><i class="fa-solid fa-arrow-left"></i> Previous</span>
+                {{ .Title }}
+            </a>
+            {{ end -}}
+        </div>
+        <div class="taglist">
+            {{- if isset .Params "tags" -}}
+            {{- $tagsLen := len .Params.tags -}}
+            {{- if gt $tagsLen 0 -}}
+            <ul>
+                {{- range $k, $v := .Params.tags -}}
+                {{- $url := printf "/tags/%s" (. | urlize | lower) -}}
+                <li>
+                    <a id="tag_{{ . | lower }}" href="{{ $url | absURL }}">{{ . | title }}</a>
+                </li>
+                {{- end -}}
+            </ul>
+            {{- end -}}
+            {{- end }}
+        </div>
+        <div class="storynav">
+            {{- with .Next }}
+            <a href="{{ .RelPermalink }}">
+                <span>Next <i class="fa-solid fa-arrow-right"></i></span>
+                {{ .Title }}
+            </a>
+            {{ end -}}
+        </div>
+    </div>
+</div>
+{{- end }}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="canonical" href="{{ .Site.BaseURL }}">
+        <link rel='stylesheet' type='text/css' href='/styles.css'>
+        <title>{{ if not .IsHome }}{{ .Title | title }} | {{ end }}{{ .Site.Title }}</title>
+        {{ if .Param "math" }}
+			{{ partialCached "math.html" . }}
+		{{ end }}
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+    </head>
+    <body>
+        <header>
+            <a id="logo" href="{{ .Site.BaseURL }}">
+                The<img src="/logo.svg" alt="A" />dminWiki
+            </a>
+        </header>
+        <main>
+            {{ block "main" . }}
+            {{ .Content }}
+            {{ end }}
+        </main>
+        <footer>
+            <p>Copyright &copy; 2026 TheAdminWiki.de</p>
+            <p>
+                <a href="/impressum">Impressum</a>
+                <a href="/datenschutz">Datenschutzbestimmung</a>
+            </p>
+        </footer>
+    </body>
+</html>

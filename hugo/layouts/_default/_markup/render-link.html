@@ -1,0 +1,31 @@
+{{- $dst := .Destination -}}
+{{- $target := "_blank" -}}
+
+{{- $path := $dst | strings.TrimPrefix "/" -}}
+{{- $anchor := "" -}}
+
+{{- if strings.Contains $path "#" -}}
+    {{- $parts := split $path "#" -}}
+    {{- $path = index $parts 0 -}}
+    {{- $anchor = printf "#%s" (index $parts 1) -}}
+{{- end -}}
+
+{{ if strings.Contains $path "://" }}
+    {{/* external link */}}
+    {{ $target = "_blank" }}
+{{ else }}
+    {{/* internal link */}}
+    {{ $target = "_self" }}
+
+    {{- if strings.HasSuffix $path ".md" -}}
+      {{- $path = replace $path ".md" "/" -}}
+    {{- end -}}
+
+    {{ if and (not (strings.HasPrefix $dst "/")) (not (strings.HasPrefix $dst "#")) }}
+        {{ $path = printf "../%s" $path }}
+    {{ end }}
+{{ end }}
+
+{{- $dst = printf "%s%s" $path $anchor -}}
+
+<a target="{{ $target }}" href="{{ $dst }}">{{ .Text }}{{ if eq $target "_blank" }} <i class="fa-solid fa-arrow-up-right-from-square"></i>{{- end -}}</a>

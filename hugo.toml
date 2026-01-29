@@ -1,3 +1,30 @@
 baseURL = 'https://theadminwiki.de/'
 languageCode = 'de-DE'
 title = 'TheAdminWiki'
+
+summaryLength = 1
+
+contentDir = "content"
+publishDir = "dist"
+staticDir   = ["static", "hugo/static"]
+archetypeDir = "hugo/archetypes"
+layoutDir   = "hugo/layouts"
+assetDir    = "hugo/assets"
+dataDir     = "hugo/data"
+i18nDir     = "hugo/i18n"
+themesDir   = "hugo/themes"
+
+[markup]
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 2
+  [markup.goldmark]
+    [markup.goldmark.extensions]
+      [markup.goldmark.extensions.passthrough]
+        enable = true
+        [markup.goldmark.extensions.passthrough.delimiters]
+          block = [['\[', '\]'], ['$$', '$$']]
+          inline = [['\(', '\)']]
+
+[params]
+  math = true

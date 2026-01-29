@@ -1,0 +1,8 @@
+services:
+  hugo:
+    image: hugomods/hugo:debian-dart-sass-node-git-non-root-0.152.2
+    volumes:
+      - ./:/src
+    ports:
+      - "1313:1313"
+    command: "hugo server --buildDrafts --noHTTPCache --bind=0.0.0.0"

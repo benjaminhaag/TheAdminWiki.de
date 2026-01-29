@@ -1,0 +1,40 @@
+{{ define "title" -}}
+{{ .Title }}
+{{- end }}
+{{ define "main" -}}
+
+<div id="content">
+    <article>
+        {{- range.Pages }}
+        {{- if ne .Params.hidden true -}}
+            <div class="section">
+                <a href="{{ .RelPermalink }}"><h2>{{ .Title }}</h2></a>
+                <!-- <p>{{ .Params.description | default .Summary }}</p> -->
+                <div class="post-grid">
+                    {{- range.Pages }}
+                        <a href="{{ .RelPermalink }}">
+                            <div class="postcard">
+                                <img src="{{ .Params.image | default "https://images.unsplash.com/photo-1644088379091-d574269d422f?q=80&w=1093&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" }}" alt="{{ .Title }}">
+                                <div>
+                                    <h3>{{ .Title }}</h3>
+                                    <p class="post-card-excerpt">
+                                        {{ .Params.description | default .Summary }}
+                                    </p>
+                                    {{ if .IsPage }}
+                                    <p>
+                                        <time datetime="{{ .Date.Format "2025-12-14T14:25:05Z07:00" }}">{{ .Date.Format "January 2, 2006" }}</time>
+                                        <span style="margin: 0 5px;">•</span>
+                                        <span class="reading-time">{{ .ReadingTime }} min read</span>
+                                    </p>
+                                    {{ end }}
+                                </div>
+                            </div>
+                        </a>
+                        {{- end }}
+                    </div>
+                </div>
+        {{- end -}}
+        {{- end}}
+    </article>
+</div>
+{{- end }}

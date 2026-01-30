@@ -12,11 +12,11 @@
         <h1>{{ block "title" . }}{{ end }}</h1>
         <div class="info">
             <p>
-                <time datetime="{{ .Date.Format "2025-12-14T14:25:05Z07:00" }}">{{ .Date.Format "January 2, 2006" }}</time>
+                <time datetime="{{ .Date.Format "2025-12-14T14:25:05Z07:00" }}">{{ .Date.Format "2. Januar 2006" }}</time>
                 <span style="margin: 0 5px;">•</span>
-                <span class="reading-time">{{ .ReadingTime }} min read</span>
+                <span class="reading-time">{{ .ReadingTime }} min</span>
             </p>
-            <a id="copy-url" href="{{ .Permalink }}" ><i class="fa-solid fa-link"></i><span class="label">Copy URL</span></a>
+            <a id="copy-url" href="{{ .Permalink }}" ><i class="fa-solid fa-link"></i><span class="label">URL Kopieren</span></a>
             <script>
                 const link = document.getElementById("copy-url");
                 const label = link.querySelector(".label");
@@ -27,8 +27,8 @@
                         label.textContent = "Copied";
                         link.classList.add("copied");
                         setTimeout(() => {
-                            label.textContent = "Copy URL";
-                            link.classList.remove("copied");
+                            label.textContent = "URL Kopieren";
+                            link.classList.remove("Kopiert");
                         }, 2000);
                     } catch (err) {
                         alert("Failed to copy link");
@@ -43,7 +43,7 @@
 <div id="content">
     <aside>
         <div id="toc">
-            Jump to section
+            Inhalt
             {{ .TableOfContents }}
         </div>
     </aside>
@@ -171,12 +171,12 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 <div id="readmore">
-    <p>Continue Reading</p>
+    <p>Weiter Lesen</p>
     <div>
         <div class="storynav">
             {{- with .Prev }}
             <a href="{{ .RelPermalink }}">
-                <span><i class="fa-solid fa-arrow-left"></i> Previous</span>
+                <span><i class="fa-solid fa-arrow-left"></i> Zurück</span>
                 {{ .Title }}
             </a>
             {{ end -}}
@@ -199,7 +199,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="storynav">
             {{- with .Next }}
             <a href="{{ .RelPermalink }}">
-                <span>Next <i class="fa-solid fa-arrow-right"></i></span>
+                <span>Weiter <i class="fa-solid fa-arrow-right"></i></span>
                 {{ .Title }}
             </a>
             {{ end -}}

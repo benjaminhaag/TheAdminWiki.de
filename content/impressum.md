@@ -1,9 +1,9 @@
 ---
-date: '2026-01-29T20:42:19Z'
-draft: true
-title: 'Impressum'
+date: "2026-01-29T20:42:19Z"
+draft: false
+title: "Impressum"
 hidden: true
-image: '/images/site_notice.webp'
+image: "/images/site_notice.webp"
 tags: []
 ---
 
@@ -12,19 +12,16 @@ tags: []
 > Pestalozzistrasse 26<br />
 > 90429 Nuremberg</p>
 
-
 ## Kontakt
 
 <p>Telefon: &#91;Telefonnummer&#93;<br />
 E-Mail: me@benjaminhaag.it</p>
-
 
 ## Umsatzsteuer-ID
 
 Umsatzsteuer-Identifikationsnummer gem&auml;&szlig; &sect; 27 a Umsatzsteuergesetz:
 
 > DE420028328
-
 
 ## Redaktionell verantwortlich
 
@@ -33,7 +30,6 @@ Umsatzsteuer-Identifikationsnummer gem&auml;&szlig; &sect; 27 a Umsatzsteuergese
 > Pestalozzistrasse 26
 > 90429 Nuremberg
 > Germany
-
 
 ## Verbraucher&shy;streit&shy;beilegung/Universal&shy;schlichtungs&shy;stelle
 

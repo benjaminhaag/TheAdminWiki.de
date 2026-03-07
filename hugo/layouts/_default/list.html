@@ -16,7 +16,7 @@
         {{- range .Pages.ByWeight }}
         <a href="{{ .RelPermalink }}">
             <div class="postcard">
-                <img src="{{ .Params.image | default "/images/default.png" }}" alt="{{ .Title }}">
+                <img src="{{ .Params.image | default "/images/default.webp" }}" alt="{{ .Title }}">
                 <div>
                     <h2>{{ .Title }}</h2>
                     <p class="post-card-excerpt">

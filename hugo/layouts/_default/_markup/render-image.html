@@ -1,0 +1,13 @@
+
+<figure>
+    <img 
+        src="{{ .Destination | safeURL }}"
+        alt="{{ .Destination | safeHTMLAttr }}"
+        title="{{ .Title | safeHTMLAttr }}"
+        class="lightbox-trigger"
+        data-caption="{{ .Text | safeHTMLAttr }}"
+    >
+    {{ if .Text }}
+        <figcaption>{{ .Text }}</figcaption>
+    {{ end }}
+</figure>

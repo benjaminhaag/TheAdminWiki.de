@@ -48,7 +48,7 @@
         </div>
     </aside>
 <article>
-    <img src="{{ .Params.image | default "/images/default.webp" }}" alt="{{ .Title }}">
+    <img id="hero" src="{{ .Params.image | default "/images/default.webp" }}" alt="{{ .Title }}">
     {{- $content := .RawContent -}}
 
     {{- $content = replaceRE

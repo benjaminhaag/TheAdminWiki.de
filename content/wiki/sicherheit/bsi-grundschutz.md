@@ -3,7 +3,7 @@ date: '2026-03-07T13:21:11Z'
 draft: false
 title: 'BSI Grundschutz'
 image: '/images/bsi-grundschutz.webp'
-tags: ["sicherheit","bsi-grundschutz"]
+tags: ["sicherheit","bsi grundschutz"]
 ---
 
 Der BSI-Grundschutz ist ein umfassendes Rahmenwerk und Methodenkatalog, der vom Bundesamt für Sicherheit in der Informationstechnik (BSI) entwickelt wurde. Ziel des BSI-Grundschutzes ist es, Organisationen systematisch und praxisnah bei der Umsetzung eines angemessenen IT-Sicherheitsniveaus zu unterstützen.

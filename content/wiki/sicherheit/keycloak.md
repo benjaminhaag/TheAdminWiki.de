@@ -1,6 +1,6 @@
 ---
 date: '2026-03-07T11:01:23Z'
-draft: true
+draft: false
 title: 'Keycloak'
 image: '/images/keycloak.webp'
 tags: ["sicherheit","keycloak", "identity and access management", "iam"]
@@ -188,6 +188,40 @@ Tools wie **Logto** oder **SuperTokens** richten sich speziell an Entwickler mod
 Eine besondere Rolle spielt **Red Hat Single Sign-On (RH-SSO)**. Dabei handelt es sich um eine Enterprise-Distribution von Keycloak, die von Red Hat gepflegt und unterstützt wird.
 
 RH-SSO basiert technisch auf Keycloak, wird jedoch von Red Hat stabilisiert, getestet und mit **kommerziellem Support** sowie **langfristigen Wartungszyklen** angeboten. Unternehmen, die auf Support-Verträge oder zertifizierte Integrationen angewiesen sind, setzen daher häufig auf diese Variante.
+
+## Autorisierung
+
+Keycloak bietet eine Reihe an mechanismen um Policies zu implementieren und durchzusetzen. Dabei können alle [Autorisierungskonzepte](./identity-and-access-management.md#autorisierung) implementiert werden.
+
+Zur Autorisierung von Clients bietet Keycloak drei modelle an.
+
+ - **Keine Autorisierung** - Die meisten apps nutzen Keycloak lediglich als Identity Provider und ignorieren die Autorisierungsmöglichkeiten. Keycloak liefert dann nurnoch die Rolle im Token und Autorisierung erfolgt im Resource Server.
+ - **Requesting Party Token (RPT)** - Der Client (Requesting Party) fordert einen Token an, der sagt auf **welcher Resource** er **welche Operation** durchführen darf (z.B. _POST_ auf _/documents_). Der Resource Server prüft dann nurnoch ob die aktuelle Operation auf der aktuellen Resource im RPT enthalten ist.
+ - **Resource Server Seitig** - Der Resource Server kann auch den Access Token selbst an Keycloak senden und prüfen ob der Client berechtigt ist. Technisch ist das das gleiche und der Resource Server würde einen RPT bekommen, interessiert sich aber nur für Erfolg (Autorisiert) oder Fehler (nicht Autorisiert).
+
+### Konzept
+
+Ein Client (oder Resource Server) fragt mittels eines **Access Tokens**, **Resource** und **Scope** bei Keycloak an und bittet um einen **RPT** der bestätigt, dass der Client berechtigt ist die Aktien (Scope) auf die Resource durchzuführen
+
+ - **Resource** - ist ein Okjekt, auf das zugegriffen werden soll
+ - **Scope** - ist meist die Methode (Create, Read, Update, Delete, ...), kann technisch aber jede feingranularere Untereinheit der Resource sein.
+ - **Policy** - stellen **unabhängig von Resource und Scope** Regeln auf ob ein Nutzer etwas darf. Dabei können Rollen, Attribute, Umgebungen, Zeit, Position, und vieles mehr in Betracht gezogen werden, um am Ende zu entscheiden ob ein Zugriff autorisiert ist oder nicht.
+ - **Permissions** - weisen Policies zu Resourcen und Scopes zu. Sie sagen "Zugriff ist genehmigt, wenn der Client auf Resource X Scope Y zugreifen will und Policy Z positiv ist".
+
+### Nachteile
+
+Der Policy enforcer ist zwar eine einfache möglichkeit schnell und flexibel Autorisierung in eine App zu bauen, bietet aber aufgrund der Zentralisierung einige Nachteile.
+
+ - **Schlechte Skalierbarkeit** - Aufgrund des Zentralen Enforcements bekommen Verteilte Systeme ein zentrales Bottleneck. Das schadet der Skalierbarkeit und der Verfügbarkeit. Ist also nicht für öffentliche SaaS geeignet.
+ - **Komplexität** - Wenn ein simples Rollenkonzept ausreicht ist das meist schneller im Backend implementiert, wenn das nur eine einzelne Abfrage ist.
+ - **Verwaltungsaufwand** - Jede Resource muss zentral angelegt und verwaltet werden. Wenn nutzer eigene Resourcen anlegen können, [z.B. bei DAC](./identity-and-access-management.md#discretionary-access-control), steigt der Verwaltungsaufwand von Keycloak exponentiell.
+ - **Designaufwand** - Meist ist Autorisierung stark mit dem Design des Backends gekoppelt. Eine Integration außerhalb, also in Keycloak erfordert zusätzlichen Aufwand für die Entkopplung.
+ - **Latenz** - Jede Anfrage ans Backend ist auch eine rekursive Anfrage an Keycloak. Bei starken Latenzanforderungen ist das ungeeignet
+ - **Lernkruve** - Wenn das Team die Integration nicht kennt, ist eine Backendseitige Implementierung meist ohnehin schneller
+ - **Lock In** - Wenn eine App Keycloak integriert muss sie auch immer mit Keycloak genutzt werden. Eine unabhängige Bereitstellung ist nicht mehr möglich. Das macht die Distribution der Anwendung schwer, weshalb Keycloak Autorisierung in (fast) keiner Anwendung verbaut ist.
+
+ > [!TIP]
+ > In ~95-99% aller Fälle ist die Integration von Keycloak als Autorisierungsengine langfristig ungeeignet. Allerdings ist es sehr gut geeignet für **Proof of Concepts (PoCs)** und **Sicherheitskritischer Infrastruktur** wo eine sichere, zentrale Policyverwaltung wichtiger ist als Latenz und verfügbarkeit. Da die wenigsten **Internen Tools** den Stand den PoC offiziell verlassen, lohnt es sich hier auch oft den Weg über Keycloak zu gehen.
 
 ## Keycloak im Kontext des BSI-Grundschutzes
 

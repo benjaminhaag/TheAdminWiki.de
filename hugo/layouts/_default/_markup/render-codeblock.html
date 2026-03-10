@@ -1,0 +1,7 @@
+<div class="content-wrapper">
+  {{ if .Type }}
+    <div class="code-lang">{{ .Type }}</div>
+  {{ end }}
+
+  {{ highlight .Inner .Type "" }}
+</div>

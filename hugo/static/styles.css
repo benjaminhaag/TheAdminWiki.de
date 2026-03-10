@@ -139,7 +139,7 @@ figcaption {
     max-width: 100%;
 }
 
-#content article .table-wrapper {
+#content article .content-wrapper, code {
     max-width: 100%;
     overflow-x: auto;
 }

@@ -155,8 +155,8 @@ Der IdP liefert:
 
 Das **ID Token** ist ein **JWT**, das Informationen über den Benutzer enthält und an den Client als Audience gebunden ist.
 
- > [!TIP]
- > OAuth2 kann theoretisch zur Authentifizierung genutzt werden, da sich der Resource Owner authentifizieren muss und der Access Token genutzt werden kann um User Details vom IdP abzufragen. Allerdings kann der Client dann den access_token nutzen um sich fälschlicherweise dem Resource Server gegenüber als Nutzer auszugeben und somit mehr berechtigungen erhalten als er sollte. Der Identity Token von OIDC ist an den anfragenden Client gebunden und kann daher nicht misbraucht werden. Deshalb sollten die Rollen der beiden Protokolle respektiert werden.
+> [!TIP]
+> OAuth2 kann theoretisch zur Authentifizierung genutzt werden, da sich der Resource Owner authentifizieren muss und der Access Token genutzt werden kann um User Details vom IdP abzufragen. Allerdings kann der Client dann den access_token nutzen um sich fälschlicherweise dem Resource Server gegenüber als Nutzer auszugeben und somit mehr berechtigungen erhalten als er sollte. Der Identity Token von OIDC ist an den anfragenden Client gebunden und kann daher nicht misbraucht werden. Deshalb sollten die Rollen der beiden Protokolle respektiert werden.
 
 ### Opaque Token
 

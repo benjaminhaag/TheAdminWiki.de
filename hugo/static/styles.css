@@ -132,11 +132,18 @@ figcaption {
 #content article {
     padding: 0 100px;
     width: 100%;
+    box-sizing: border-box;
 }
 
 #content article img {
     max-width: 100%;
 }
+
+#content article .table-wrapper {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
 #content article #hero {
     border-radius: 10px;
 }

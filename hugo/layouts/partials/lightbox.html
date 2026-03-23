@@ -1,21 +1,24 @@
 <div id="lightbox" style="display:none;">
     <span id="lightbox-close">&times;</span>
-    <img id="lightbox-img" src="">
+    <div id="lightbox-content"></div>
     <div id="lightbox-caption"></div>
 </div>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   const lightbox = document.getElementById('lightbox');
-  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxContent = document.getElementById('lightbox-content');
   const lightboxCaption = document.getElementById('lightbox-caption');
   const closeBtn = document.getElementById('lightbox-close');
 
-  document.querySelectorAll('.lightbox-trigger').forEach(img => {
-    img.addEventListener('click', () => {
+  document.querySelectorAll('.lightbox-trigger').forEach(trigger => {
+    console.log(trigger);
+    trigger.addEventListener('click', () => {
       lightbox.style.display = 'flex';
-      lightboxImg.src = img.src;
-      lightboxCaption.textContent = img.dataset.caption || '';
+      lightboxContent.innerHTML = '';
+      // TODO: hide if no caption
+      lightboxCaption.textContent = trigger.dataset.caption || '';
+      lightboxContent.appendChild(trigger.cloneNode(true));
     });
   });
 

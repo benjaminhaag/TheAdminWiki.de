@@ -26,18 +26,21 @@ Sowohl Request als auch Response haben eine **Request Line** bzw **Status Line**
 
 ## Nachrichtenformat
 
-```
-Bits    0    2    4        8                16                               32
-        +----+----+--------+----------------+--------------------------------+
-Fields  |VER |TYPE| TKNLEN |      Code      |            Message ID          | (Required)
-        +----+----+--------+----------------+--------------------------------+
-        |                        TOKEN (TKNLEN Bytes)                        | (Optional)
-        +--------------------------------------------------------------------+
-        |                             Options                                | (Optional)
-        +---------+----------------------------------------------------------+
-        |11111111 |                    Payload                               + (Optional)
-        +---------+----------------------------------------------------------+
-```
+{{< mermaid >}}
+---
+title: "CoAP Message"
+---
+packet
+0-1: "Version"
+2-3: "Type"
+4-7: "Token length"
+8-15: "Code"
+16-31: "Message ID"
+32-63: "Token (Variable Length)"
+64-95: "Options (Multiple, Variable Length)"
+96-103: "11111111"
+104-127: "Payload (Variable Length)"
+{{< /mermaid >}}
 
  - **VER** *(2 Bits)* gibt die CoAP Version (aktuell `0b01`) an
  - **TYPE** *(2 Bits)* gibt den [Message Type](#message-type) für die [Fehlertolleranz](#fehlertolleranz) an
@@ -61,12 +64,14 @@ Fields  |VER |TYPE| TKNLEN |      Code      |            Message ID          | (
 
 ### Code
 
-```
-Bits    0
-        +------+----------+
-Fields  |Class |  Detail  |
-        +------+----------+
-```
+{{< mermaid >}}
+---
+title: "Code"
+---
+packet
+0-2: "Class"
+3-7: "Detail"
+{{< /mermaid >}}
 
 Der Code entspricht der Methode im HTTP Request, bzw. dem Status in der HTTP Response. Er besteht aus Class und Detail.
 
@@ -90,18 +95,17 @@ Der Token dient der Zuordnung von Response zu Request auf Client Seite. Die Mess
 
 ### Options
 
-```
-Bits    0        4        8
-        +--------+--------+
-Fields  | Delta  | Length | (Required 1Byte)
-        +--------+--------+
-        | delta Extended  | (Optional 0-2 Bytes)
-        +-----------------+
-        | length Extended | (Optional 0-2 Bytes)
-        +-----------------+
-        |      Value      | (Optional ≥0 Bytes)
-        +-----------------+
-```
+{{< mermaid >}}
+---
+title: "Code"
+---
+packet
+0-2: "Delta"
+3-7: "Length"
+8-15: "Delta Extended (Optional 0-2 Bytes)"
+16-23: "Length Extended (Optional 0-2 Bytes)"
+24-31: "Value (Optional ≥0 Bytes)"
+{{< /mermaid >}}
 
 Um Options möglichst klein zu halten, werden namen nicht im Klartext als Strings gesendet, sondern Zahlen zugeordnet. Zum Beispiel:
 

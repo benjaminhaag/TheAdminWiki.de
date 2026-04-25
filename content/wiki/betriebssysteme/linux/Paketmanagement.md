@@ -113,8 +113,8 @@ Einfache (low-level) Paketmanager kennen nur installierte Pakete und das, was ge
 | Paketinformationen anzeigen                  | `dpkg -I <PACKAGE>`       |
 | Paketinformationen anzeigen                  | `dpkg -I <FILE>`          |
 | Installierte Dateien auflisten                | `dpkg -L <PACKAGE>`       |
-| Installierte Dateien auflisten                | `dpkg -L <FILENAME>       |
-| Installierte Pakete auflisten                 | `dpkg --get-selections    |
+| Installierte Dateien auflisten                | `dpkg -L <FILENAME>`       |
+| Installierte Pakete auflisten                 | `dpkg --get-selections`    |
 | Paket zu einer installierten Datei finden    | `dpkg-query -s <FILE>`    |
 | Paketeinstellungen Zurücksetzen               | `dpkg-reconfigure <PACKAGE>`  |
 
@@ -260,10 +260,10 @@ Quellen für YUM und DNF befinden sich in `.repo` Dateien in `/etc/yum.repos.d/`
 
 | Beschreibung                                  | yum                                   | dnf 4                                 | dnf 5                                             |
 | --------------------------------------------- | ------------------------------------- | ------------------------------------- | ------------------------------------------------- |
-| Repositories auflisten                        | yum repolist all                      | dnf repolist --all                    | dnf repolist --all                                |
-| Repository hinzufügen                         | yum-config-manager --add-repo <URL>   | dnf config-manager --add-repo <URL>   | dnf config-manager addrepo --frem-repofile=<URL>  |
-| Repository aktivieren                         | yum-config-manager --enable <REPO>    | dnf config-manager --set-enabled <REPO>   | dnf config-manager setopt <REPO>.enabled=1    |
-| Repository deaktivieren                       | yum-config-manager --disable <REPO>    | dnf config-manager --set-disabled <REPO>   | dnf config-manager setopt <REPO>.enabled=0  |
+| Repositories auflisten                        | `yum repolist all`                      | `dnf repolist --all`                    | `dnf repolist --all`                                |
+| Repository hinzufügen                         | `yum-config-manager --add-repo <URL>`   | `dnf config-manager --add-repo <URL>`   | `dnf config-manager addrepo --frem-repofile=<URL>`  |
+| Repository aktivieren                         | `yum-config-manager --enable <REPO>`    | `dnf config-manager --set-enabled <REPO>`   | `dnf config-manager setopt <REPO>.enabled=1`    |
+| Repository deaktivieren                       | `yum-config-manager --disable <REPO>`    | `dnf config-manager --set-disabled <REPO>`   | `dnf config-manager setopt <REPO>.enabled=0`  |
 
 > [!TIP]
 > Zum löschen kann die `.repo` datei manuell gelöscht werden. Alternativ wird das Repository nur disabled.
@@ -301,13 +301,13 @@ Quellen für YUM und DNF befinden sich in `.repo` Dateien in `/etc/zypp/repos.d/
 
 | Beschreibung                                  | zypper                                |
 | --------------------------------------------- | ------------------------------------- |
-| Repositories auflisten                        | zypper repos                          |
-| Repository hinzufügen                         | zypper addrepo <URL> <NAME>           |
-| Repository löschen                            | zypper removerepo <NAME>              |
-| Repository aktivieren                         | zypper modifyrepo -e <NAME>           |
-| Repository deaktivieren                       | zypper modifyrepo -d <NAME>           |
-| Autorefresh aktivieren                        | zypper modifyrepo -f <NAME>           |
-| Autorefresh deaktivieren                      | zypper modifyrepo -F <NAME>           |
+| Repositories auflisten                        | `zypper repos`                          |
+| Repository hinzufügen                         | `zypper addrepo <URL> <NAME>`           |
+| Repository löschen                            | `zypper removerepo <NAME>`              |
+| Repository aktivieren                         | `zypper modifyrepo -e <NAME>`           |
+| Repository deaktivieren                       | `zypper modifyrepo -d <NAME>`           |
+| Autorefresh aktivieren                        | `zypper modifyrepo -f <NAME>`           |
+| Autorefresh deaktivieren                      | `zypper modifyrepo -F <NAME>`           |
 
 ## Containerbasierte Paketmanager
 

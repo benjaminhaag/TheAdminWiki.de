@@ -110,12 +110,12 @@ Einfache (low-level) Paketmanager kennen nur installierte Pakete und das, was ge
 | Paket installieren                           | `dpkg -i <FILE>`          |
 | Paket deinstallieren                         | `dpkg -r <PACKAGE>`       |
 | Paket inklusive aller Dateien entfernen      | `dpkg -P <PACKAGE>`       |
-| Paketinformationen anzeigen                  | `dpkg -I <PACKAGE>`       |
+| Paketinformationen anzeigen                  | `dpkg -s <PACKAGE>`       |
 | Paketinformationen anzeigen                  | `dpkg -I <FILE>`          |
 | Installierte Dateien auflisten                | `dpkg -L <PACKAGE>`       |
 | Installierte Dateien auflisten                | `dpkg -L <FILENAME>`       |
 | Installierte Pakete auflisten                 | `dpkg --get-selections`    |
-| Paket zu einer installierten Datei finden    | `dpkg-query -s <FILE>`    |
+| Paket zu einer installierten Datei finden    | `dpkg-query -S <FILE>`    |
 | Paketeinstellungen Zurücksetzen               | `dpkg-reconfigure <PACKAGE>`  |
 
 ### RPM

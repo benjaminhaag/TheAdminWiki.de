@@ -58,6 +58,11 @@ figcaption {
     margin-top: 0.5em;
 }
 
+pre>code {
+    display: block;
+    padding: 5px 10px;
+}
+
 #toc {
     position: sticky;
     top: 20px;

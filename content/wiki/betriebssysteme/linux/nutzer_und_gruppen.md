@@ -193,7 +193,7 @@ groupadd [options] GRUPPE
 
 Um eine Gruppe zu entfernen kann `groupdel` genutzt werden, oder `delgroup` unter Ubuntu.
 ```bash
-groupdel [options] GRUPPE
+groupdel GRUPPE
 ```
 
 #### Gruppenadministration

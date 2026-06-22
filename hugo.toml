@@ -28,3 +28,6 @@ themesDir   = "hugo/themes"
 
 [params]
   math = true
+
+[minify]
+  disableHTML = true

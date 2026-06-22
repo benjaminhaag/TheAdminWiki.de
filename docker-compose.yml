@@ -1,6 +1,6 @@
 services:
   hugo:
-    image: hugomods/hugo:debian-dart-sass-node-git-non-root-0.152.2
+    image: hugomods/hugo:debian-dart-sass-git-non-root-0.163.3
     volumes:
       - ./:/src
     ports:

@@ -132,7 +132,7 @@ Im Web wird SPNEGO häufig verwendet, um Kerberos-basierte SSO-Authentifizierung
 
 Dies wird beispielsweise in Unternehmensnetzwerken genutzt, damit Benutzer automatisch im Browser angemeldet sind, wenn sie bereits am Betriebssystem angemeldet sind. SPNEGO gibt das ticket an den Webserver weiter, da dieser sich das nicht direkt vom PC holen kann wie native Anwendungen.
 
-## Hybridlösungen {#hybridloesungen}
+## Hybridlösungen
 
 Native Systeme für SSO funktionieren gut innerhalb betriebssystemnaher Umgebungen. Über einen Browser ist die Nutzung solcher Protokolle zwar mittels SPNEGO möglich, aber deutlich schwerer und funktioniert nur wirklich gut bei homogenen Ökosystemen wie reine Microsoft Lösungen, zum Beispiel Office 365 im Browser. Allerdings bietet Microsoft bei weitem nicht für alles eine Lösung, und oft reichen diese dann nichtmal aus. 
 

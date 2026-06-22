@@ -159,7 +159,7 @@ Diese Integration ermöglicht unter anderem:
  - Enterprise [Single Sign-On](./sso.md)
  - Föderation zwischen Organisationen
 
-## Keycloak als Open-Source-Lösung {#keycloak-als-open-source-loesung}
+## Keycloak als Open-Source-Lösung
 
 Keycloak ist ein Open-Source-[Identity- und Access-Management-System (IAM)](./identity-and-access-management.md), das häufig für Single-Sign-On und Identity-Provider-Szenarien eingesetzt wird.
 

@@ -19,6 +19,8 @@ themesDir   = "hugo/themes"
     startLevel = 2
     endLevel = 2
   [markup.goldmark]
+    [markup.goldmark.parser]
+      autoIDType = "github-ascii"
     [markup.goldmark.extensions]
       [markup.goldmark.extensions.passthrough]
         enable = true

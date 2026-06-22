@@ -33,6 +33,7 @@ hr {
 header {
     box-shadow: 0 2px 4px 0 #00000044;
     padding: 20px;
+    z-index: 1000;
 }
 
 header a {
@@ -40,10 +41,10 @@ header a {
 }
 
 main {
+    z-index: 1;
     flex: 1;
     width: 100%;
-    max-width: 1440px;
-    margin: auto;
+    display: flex;
 }
 
 figure {
@@ -197,6 +198,7 @@ pre>code {
 }
 
 footer {
+    z-index: 1000;
     background: #252d3c;
     color: #ccc;
     padding: 40px;
@@ -444,4 +446,32 @@ address {
 .mermaid {
   display: flex;
   justify-content: center;
+}
+
+#error404 {
+    background-color: #edf3fb;
+    flex: 1;
+    background-image: url('/notfound.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
+    padding: 20px;
+}
+#error404 * {
+    margin: 5px;
+    font-weight: normal;
+}
+
+#error404 h1 {
+    font-size: 5rem;
+}
+
+#maincontainer {
+    flex: 1;
+    max-width: 1440px;
+    margin: auto;
 }
